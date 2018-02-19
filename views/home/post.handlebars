@@ -1,0 +1,71 @@
+<div class="row">
+
+    <!-- Post Content Column -->
+    <div class="col-lg-8">
+    {{> home/form-msgs}}
+        <!-- Title -->
+        <h1 class="mt-4">{{post.title}}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            by
+            <a href="#">{{post.user.firstName}}</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posted on {{generateTime post.date 'MMMM Do YYYY'}}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="/uploads/{{post.file}}" alt="{{title}}">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{post.body}}</p><hr>
+
+        {{#if user}}
+        {{#if post.allowComments}}
+        <!-- Comments Form -->
+        <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form action="/admin/comments" method="post">
+                    <div class="form-group">
+                        <textarea name="body" class="form-control" rows="3"></textarea>
+                        <input type="hidden" name="id" value="{{post.id}}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        {{else}}
+        <h2>Comments not allowed in this post</h2><hr>
+        {{/if}}
+            {{else}}
+            <h2>You need to <a href="/login">login</a></h2><hr>
+
+        {{/if}}
+        <!-- Single Comment -->
+
+
+        <!-- Comment with nested comments -->
+        {{#each post.comments}}
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+                <h5 class="mt-0">{{user.firstName}}</h5>
+                <p>{{body}}</p>
+
+            </div>
+        </div>
+        {{/each}}
+
+    </div>
+
+  {{> home/sidebar}}
+
+</div>

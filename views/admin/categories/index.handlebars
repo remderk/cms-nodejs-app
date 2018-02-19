@@ -1,0 +1,46 @@
+
+
+<div class="row">
+    <div class="col-sm-12">
+    {{> home/form-msgs}}
+    <h1>Create Category</h1>
+        <form action="/admin/categories/create" method="post">
+               <div class="form-group">
+               <label for="name">Name</label>
+               <input type="text" name="name" placeholder="Enter name" class="form-control">
+               </div>
+               <button class="btn btn-primary">Create category</button>
+         </form>
+    </div>
+    </div>
+    <div class="row">
+
+    <div class="col-sm-12">
+    <h1>Categories</h1>
+    <table class="table">
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>Name</th>
+    <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each categories}}
+    <tr>
+    <td>{{id}}</td>
+     <td>{{name}}</td>
+      <td>{{date}}</td>
+      <td><a href="/admin/categories/edit/{{id}}" class="btn btn-info">Edit</a></td>
+      <td>
+        <form method="post" action="/admin/categories/{{id}}?_method=DELETE">
+        <button class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+    </tbody>
+    </table>
+    </div>
+
+</div>
